@@ -1,28 +1,57 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button type="button" name="button" @click="play()">
+      play
+    </button>
+    <fbx :play="fbx.play"></fbx>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import fbx from './components/fbx-viewer.vue'
 
 export default {
   name: 'app',
+  data() {
+    return {
+      fbx: {
+        play: false
+      }
+    }
+  },
   components: {
-    HelloWorld
+    fbx
+  },
+  methods: {
+    play () {
+      // eslint-disable-next-line
+      this.fbx.play = !this.fbx.play
+    }
   }
 }
 </script>
 
 <style>
+html, body {
+  margin:0;
+  padding:0;
+}
 #app {
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+  background:lightgray;
+  text-align:center;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+button {
+  border:1px solid black;
+  padding: 5px 20px;
+  text-transform:uppercase;
+  background:none;
+  cursor:pointer;
 }
 </style>
