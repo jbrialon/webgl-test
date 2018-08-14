@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <button type="button" name="button" @click="play()">
-      play
-    </button>
     <fbx :play="fbx.play"></fbx>
   </div>
 </template>
