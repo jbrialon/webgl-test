@@ -1,6 +1,5 @@
 <template>
-  <div class="fbx-viewer">
-  </div>
+  <div class="fbx-viewer"></div>
 </template>
 
 <script>
@@ -13,12 +12,13 @@ let camera, scene, renderer, light, controls, action
 
 let clock = new THREE.Clock();
 
+
 export default {
   name: 'fbx-viewer',
   props: {
-    play: {
-      type: Boolean,
-      default: false
+    url: {
+      type: String,
+      default: 'shark.fbx'
     }
   },
   methods: {
@@ -47,21 +47,20 @@ export default {
       light.shadow.camera.right = 120
       // scene.add(light)
 
-      // scene.add( new THREE.CameraHelper( light.shadow.camera ) );
+      // scene.add( new THREE.CameraHelper( light.shadow.camera ) )
 
       // ground
 
-      var grid = new THREE.GridHelper( 2000, 20, 0x000000, 0x000000 );
-      grid.material.opacity = 0.2;
-      grid.material.transparent = true;
-      scene.add( grid );
+      var grid = new THREE.GridHelper( 2000, 20, 0x000000, 0x000000 )
+      grid.material.opacity = 0.2
+      grid.material.transparent = true
+      // scene.add( grid )
 
       // model
       let loader = new FBXLoader()
-      loader.load('riggedshark.fbx', function (object) {
+      loader.load(this.url, function (object) {
         object.mixer = new THREE.AnimationMixer(object)
         mixers.push(object.mixer)
-
         action = object.mixer.clipAction(object.animations[ 0 ])
         action.play()
         object.traverse(function (child) {
@@ -95,15 +94,6 @@ export default {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix()
       renderer.setSize( window.innerWidth, window.innerHeight )
-    }
-  },
-  watch: {
-    play () {
-      if (this.play) {
-        action.play()
-      } else {
-        action.stop()
-      }
     }
   },
   mounted () {

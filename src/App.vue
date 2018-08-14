@@ -1,32 +1,12 @@
 <template>
   <div id="app">
-    <fbx :play="fbx.play"></fbx>
+    <div id="nav">
+      <router-link to="/">Shark</router-link> |
+      <router-link to="/turtle">Turtle</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import fbx from './components/fbx-viewer.vue'
-
-export default {
-  name: 'app',
-  data() {
-    return {
-      fbx: {
-        play: false
-      }
-    }
-  },
-  components: {
-    fbx
-  },
-  methods: {
-    play () {
-      // eslint-disable-next-line
-      this.fbx.play = !this.fbx.play
-    }
-  }
-}
-</script>
 
 <style>
 html, body {
@@ -34,6 +14,7 @@ html, body {
   padding:0;
 }
 #app {
+  position:relative;
   width:100vw;
   height:100vh;
   overflow:hidden;
@@ -44,6 +25,15 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#nav {
+  position:absolute;
+  top:10px;
+  left:10px;
+  color:white;
+}
+#nav a {
+  color:white;
+}
 button {
   border:1px solid black;
   padding: 5px 20px;
