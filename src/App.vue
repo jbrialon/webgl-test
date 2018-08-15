@@ -28,7 +28,7 @@ html, body {
 #nav {
   position:absolute;
   top:10px;
-  left:10px;
+  left:90px;
   color:white;
 }
 #nav a {

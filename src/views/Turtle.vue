@@ -6,7 +6,7 @@
 
 <script>
 // @ is an alias to /src
-import fbx from '../components/fbx-viewer.vue'
+import fbx from '@/components/fbx-viewer.vue'
 
 export default {
   name: 'home',

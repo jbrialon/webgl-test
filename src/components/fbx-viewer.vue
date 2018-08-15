@@ -6,12 +6,12 @@
 import * as THREE from 'three'
 import FBXLoader from 'three-fbxloader-offical'
 import OrbitControls from 'three-orbitcontrols'
+import Stats from 'stats.js'
 
 let mixers = []
-let camera, scene, renderer, light, controls, action
+let camera, scene, renderer, light, controls, action, stats
 
 let clock = new THREE.Clock();
-
 
 export default {
   name: 'fbx-viewer',
@@ -80,6 +80,9 @@ export default {
       this.$el.appendChild(renderer.domElement)
 
       window.addEventListener( 'resize', this.onWindowResize, false )
+
+      stats = new Stats()
+      this.$el.appendChild( stats.dom )
     },
     animate () {
       requestAnimationFrame(this.animate)
@@ -89,6 +92,7 @@ export default {
         }
       }
       renderer.render(scene, camera)
+      stats.update()
     },
     onWindowResize () {
       camera.aspect = window.innerWidth / window.innerHeight;

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "inflate": "0.0.7",
+    "stats.js": "^0.17.0",
     "three": "^0.95.0",
     "three-fbx-loader": "^1.0.3",
     "three-fbxloader-offical": "^1.0.0",
