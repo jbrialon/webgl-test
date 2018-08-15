@@ -8,6 +8,8 @@ import FBXLoader from 'three-fbxloader-offical'
 import OrbitControls from 'three-orbitcontrols'
 import Stats from 'stats.js'
 
+import Plankton from '@/components/Plankton.js'
+
 let mixers = []
 let camera, scene, renderer, light, controls, action, stats
 
@@ -50,6 +52,10 @@ export default {
       // scene.add( new THREE.CameraHelper( light.shadow.camera ) )
 
       // ground
+      // var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x045797, depthWrite: false } ) )
+      // mesh.rotation.x = - Math.PI / 2
+      // mesh.receiveShadow = true
+      // scene.add( mesh )
 
       var grid = new THREE.GridHelper( 2000, 20, 0x000000, 0x000000 )
       grid.material.opacity = 0.2
@@ -61,18 +67,26 @@ export default {
       loader.load(this.url, function (object) {
         object.mixer = new THREE.AnimationMixer(object)
         mixers.push(object.mixer)
+
         action = object.mixer.clipAction(object.animations[ 0 ])
         action.play()
+
         object.traverse(function (child) {
           if (child.isMesh) {
             child.castShadow = true
             child.receiveShadow = true
           }
         })
-        object.position.y = 100
+        // object.position.y = 100
         scene.add(object)
       })
 
+      // set up plankton
+      let plankton = new Plankton()
+      plankton.position.y = 600
+      scene.add(plankton)
+
+      // renderer
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
       renderer.setPixelRatio(window.devicePixelRatio)
       renderer.setSize(window.innerWidth, window.innerHeight)
@@ -92,6 +106,7 @@ export default {
         }
       }
       renderer.render(scene, camera)
+      controls.update()
       stats.update()
     },
     onWindowResize () {

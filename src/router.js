@@ -18,6 +18,14 @@ export default new Router({
       // this generates a separate chunk (Turtle.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/Turtle.vue')
+    },
+    {
+      path: '/diver',
+      name: 'diver',
+      // route level code-splitting
+      // this generates a separate chunk (Turtle.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/Diver.vue')
     }
   ]
 })

@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Shark</router-link> |
-      <router-link to="/turtle">Turtle</router-link>
+      <router-link to="/turtle">Turtle</router-link> |
+      <router-link to="/diver">Diver</router-link>
     </div>
     <router-view/>
   </div>
